@@ -63,32 +63,19 @@ const Todos = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 
 const Dones = styled.div`
-  display: flex;
-  flex-direction: column;
   width: 100%;
   height: 90%;
-  color: #6d6d6d;
   border: 0.5px solid #736e6e;
-  box-sizing: border-box;
   border-radius: 10px;
-`;
-
-const Done_lists = styled.ul`
-  overflow: auto;
-  height: 80%;
-  width: 88%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  scrollbar-width: none;
+  color: #6d6d6d;
   box-sizing: border-box;
-  padding-left: 0px;
-  list-style-type: none;
+  align-items: center;
 `;
 
 const Todo_lists = styled.ul`
@@ -104,6 +91,25 @@ const Todo_lists = styled.ul`
   padding-left: 0px;
   cursor: pointer;
   list-style-type: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const Done_lists = styled.ul`
+  overflow: auto;
+  height: 80%;
+  width: 88%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scrollbar-width: none;
+  box-sizing: border-box;
+  padding-left: 0px;
+  list-style-type: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const TodoNum = styled.span`
@@ -137,7 +143,18 @@ export default function Todo() {
   const [dones, setDones] = useState([]);
 
   const createTodo = (listInput) => {
-    setTodos((prevTodos) => [listInput, ...prevTodos]);
+    setTodos((prevTodos) => [listInput, ...prevTodos]); //todo리스트에 Input div 추가
+    //localStorage.setItem(JSON.stringify(todos));
+  };
+
+  const moveTodo = (index) => {
+    setTodos((prevTodos) => prevTodos.filter((item, i) => i !== index)); //todo리스트에서 index가 일치하는 아이템만 제거한 리스트로 setTodo
+    setDones((prevDones) => [todos[index], ...prevDones]); //done리스트에 list추가
+  };
+
+  const moveDone = (index) => {
+    setDones((prevDones) => prevDones.filter((item, i) => i !== index));
+    setTodos((prevTodos) => [dones[index], ...prevTodos]); //todo리스트에 list추가
   };
 
   return (
@@ -150,7 +167,11 @@ export default function Todo() {
             <TodoNum>Todo: {todos.length}</TodoNum>
             <Todo_lists>
               {todos.map((item, index) => (
-                <ListItem key={index} input={item} />
+                <ListItem
+                  key={index}
+                  input={item}
+                  onClick={() => moveTodo(index)}
+                />
               ))}
             </Todo_lists>
           </Todos>
@@ -159,8 +180,16 @@ export default function Todo() {
         <Second>
           <DailyDate />
           <Dones>
-            <DoneNum>Done: 0</DoneNum>
-            <Done_lists></Done_lists>
+            <DoneNum>Done: {dones.length}</DoneNum>
+            <Done_lists>
+              {dones.map((item, index) => (
+                <ListItem
+                  key={index}
+                  input={item}
+                  onClick={() => moveDone(index)}
+                />
+              ))}
+            </Done_lists>
           </Dones>
         </Second>
       </TodoList>

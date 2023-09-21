@@ -19,11 +19,11 @@ const ItemText = styled.text`
   font-size: 13px;
 `;
 
-export default function ListItem({ input }) {
+export default function ListItem({ input, onClick }) {
   return (
     <Item>
       <FontAwesomeIcon icon={faCircle} />
-      <ItemText>{input}</ItemText>
+      <ItemText onClick={onClick}>{input}</ItemText>
       <FontAwesomeIcon icon={faTrashCan} />
     </Item>
   );
