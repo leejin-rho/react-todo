@@ -14,7 +14,7 @@ const Container = styled.div`
 
   @media (max-width: 390px) {
     width: auto;
-    height: 65vh;
+    height: 70vh;
   }
 `;
 
@@ -29,8 +29,8 @@ const Title = styled.h1`
 const TodoList = styled.div`
   display: flex;
   align-items: center;
-  width: 60vh;
-  height: 65vh;
+  width: 80vh;
+  height: 70vh;
   padding: 10px;
   justify-content: space-between;
   background-color: #f3f3f3;
@@ -39,7 +39,7 @@ const TodoList = styled.div`
 
   @media (max-width: 390px) {
     width: 90%;
-    height: 65vh;
+    height: 70vh;
   }
 `;
 
@@ -157,6 +157,14 @@ export default function Todo() {
     setTodos((prevTodos) => [dones[index], ...prevTodos]); //todo리스트에 list추가
   };
 
+  const deleteTodo = (index) => {
+    setTodos((prevTodos) => prevTodos.filter((item, i) => i !== index));
+  };
+
+  const deleteDone = (index) => {
+    setDones((prevDones) => prevDones.filter((item, i) => i !== index));
+  };
+
   return (
     <Container>
       <Title>DAILY PLANNER</Title>
@@ -170,6 +178,8 @@ export default function Todo() {
                 <ListItem
                   key={index}
                   input={item}
+                  isClicked={false}
+                  deleteList={() => deleteTodo(index)}
                   onClick={() => moveTodo(index)}
                 />
               ))}
@@ -186,6 +196,8 @@ export default function Todo() {
                 <ListItem
                   key={index}
                   input={item}
+                  isClicked={true}
+                  deleteList={() => deleteDone(index)}
                   onClick={() => moveDone(index)}
                 />
               ))}

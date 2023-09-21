@@ -17,14 +17,35 @@ const Item = styled.div`
 const ItemText = styled.text`
   font-family: "Pretendard-Regular";
   font-size: 13px;
+  margin: 0px 8px 0px 8px;
 `;
 
-export default function ListItem({ input, onClick }) {
+const ClickedText = styled.text`
+  font-family: "Pretendard-Regular";
+  font-size: 13px;
+  margin: 0px 8px 0px 8px;
+  text-decoration: line-through;
+`;
+
+export default function ListItem({ input, onClick, isClicked, deleteList }) {
   return (
     <Item>
-      <FontAwesomeIcon icon={faCircle} />
-      <ItemText onClick={onClick}>{input}</ItemText>
-      <FontAwesomeIcon icon={faTrashCan} />
+      {isClicked ? (
+        <FontAwesomeIcon icon={faCircleCheck} style={{ height: 13 }} />
+      ) : (
+        <FontAwesomeIcon icon={faCircle} style={{ height: 13 }} />
+      )}
+      {isClicked ? (
+        <ClickedText onClick={onClick}>{input}</ClickedText>
+      ) : (
+        <ItemText onClick={onClick}>{input}</ItemText>
+      )}
+
+      <FontAwesomeIcon
+        icon={faTrashCan}
+        style={{ height: 13 }}
+        onClick={deleteList}
+      />
     </Item>
   );
 }
