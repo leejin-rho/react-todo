@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { useState, useCallback } from "react";
 
-const Container = styled.div`
+const Container = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 5px;
   background-color: #e0e0e0;
   border-radius: 10px;
-  padding: 3px;
+  padding: 5px;
   height: 10%;
   box-sizing: border-box;
   border: 0.5px solid #736e6e;
@@ -41,21 +41,29 @@ const AddButton = styled.button`
   cursor: pointer;
 `;
 
-export default function TodoInput({ input }) {
+export default function TodoInput({ createTodo }) {
   const [value, setValue] = useState("");
 
-  const onChange = useCallback((e) => {
-    setValue(e.target.value);
-  }, []);
-
-  const onSubmit = useCallback(
+  const onChange = useCallback(
     (e) => {
-      setValue(""); //value 초기화
-      //기본이벤트(새로고침) 방지
-      e.preventDefault();
+      setValue(e.target.value);
     },
     [value]
   );
+
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      if (value.trim() !== "") {
+        console.log("입력", value);
+        createTodo(value);
+        setValue("");
+      }
+    },
+    [value]
+  );
+
   return (
     <Container onSubmit={onSubmit}>
       <InputField

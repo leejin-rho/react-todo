@@ -1,12 +1,30 @@
 import React from "react";
 import styled from "styled-components";
+import { faCircle, faCircleCheck } from "@fortawesome/free-regular-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ListItem = styled.div``;
+const Item = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+`;
 
-function ListItem({ todos }) {
-    return <div className="ListItem">
-      
-  </div>;
+const ItemText = styled.text`
+  font-family: "Pretendard-Regular";
+  font-size: 13px;
+`;
+
+export default function ListItem({ input }) {
+  return (
+    <Item>
+      <FontAwesomeIcon icon={faCircle} />
+      <ItemText>{input}</ItemText>
+      <FontAwesomeIcon icon={faTrashCan} />
+    </Item>
+  );
 }
-
-export default ListItem;

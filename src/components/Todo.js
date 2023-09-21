@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import DailyDate from "./DailyDate";
 import TodoInput from "./InputItem";
 import Clock from "./Clock";
+import ListItem from "./ListItem";
 
 const Container = styled.div`
   display: flex;
@@ -62,7 +63,8 @@ const Todos = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Dones = styled.div`
@@ -79,29 +81,29 @@ const Dones = styled.div`
 const Done_lists = styled.ul`
   overflow: auto;
   height: 80%;
-  width: 100%;
+  width: 88%;
   display: flex;
   flex-direction: column;
   align-items: center;
   scrollbar-width: none;
   box-sizing: border-box;
+  padding-left: 0px;
+  list-style-type: none;
 `;
 
 const Todo_lists = styled.ul`
   overflow: auto;
   height: 80%;
-  width: 100%;
+  width: 88%;
   display: flex;
   flex-direction: column;
   align-items: center;
   scrollbar-width: none;
   box-sizing: border-box;
-  justify-content: space-between;
   margin-bottom: 5px;
-  width: 88%;
+  padding-left: 0px;
   cursor: pointer;
-  font-family: "Pretendard-Regular";
-  font-size: 13px;
+  list-style-type: none;
 `;
 
 const TodoNum = styled.span`
@@ -131,15 +133,26 @@ const DoneNum = styled.span`
 `;
 
 export default function Todo() {
+  const [todos, setTodos] = useState([]);
+  const [dones, setDones] = useState([]);
+
+  const createTodo = (listInput) => {
+    setTodos((prevTodos) => [listInput, ...prevTodos]);
+  };
+
   return (
     <Container>
       <Title>DAILY PLANNER</Title>
       <TodoList>
         <First>
-          <TodoInput />
+          <TodoInput createTodo={createTodo} />
           <Todos>
-            <TodoNum>Todo: 0</TodoNum>
-            <Todo_lists />
+            <TodoNum>Todo: {todos.length}</TodoNum>
+            <Todo_lists>
+              {todos.map((item, index) => (
+                <ListItem key={index} input={item} />
+              ))}
+            </Todo_lists>
           </Todos>
         </First>
 
@@ -147,7 +160,7 @@ export default function Todo() {
           <DailyDate />
           <Dones>
             <DoneNum>Done: 0</DoneNum>
-            <Done_lists />
+            <Done_lists></Done_lists>
           </Dones>
         </Second>
       </TodoList>
