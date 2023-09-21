@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DailyDate from "./DailyDate";
 import TodoInput from "./InputItem";
@@ -142,23 +142,42 @@ export default function Todo() {
   const [todos, setTodos] = useState([]);
   const [dones, setDones] = useState([]);
 
+  useEffect(() => {
+    //local storage load
+    const localTodoList = localStorage.getItem("todoLists");
+    const localDoneList = localStorage.getItem("doneLists");
+    if (localTodoList) setTodos(JSON.parse(localTodoList));
+    if (localDoneList) setDones(JSON.parse(localDoneList));
+  }, []);
+
+  //todo, done 리스트에 변화가 있을 때마다 localStorage에 저장
+  useEffect(() => {
+    localStorage.setItem("todoLists", JSON.stringify(todos));
+  }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem("doneLists", JSON.stringify(dones));
+  }, [dones]);
+
   const createTodo = (listInput) => {
     setTodos((prevTodos) => [...prevTodos, listInput]); //todo리스트에 Input div 추가
-    //localStorage.setItem(JSON.stringify(todos));
   };
 
   const moveTodos = (index) => {
+    const moveList = todos[index];
     setTodos((prevTodos) => prevTodos.filter((item, i) => i !== index)); //todo리스트에서 index가 일치하는 아이템만 제거한 리스트로 setTodo
-    setDones((prevDones) => [...prevDones, todos[index]]); //done리스트에 list추가
+    setDones((prevDones) => [...prevDones, moveList]); //done리스트에 list추가
   };
 
   const moveDones = (index) => {
+    const moveList = dones[index];
     setDones((prevDones) => prevDones.filter((item, i) => i !== index));
-    setTodos((prevTodos) => [...prevTodos, dones[index]]); //todo리스트에 list추가
+    setTodos((prevTodos) => [...prevTodos, moveList]); //todo리스트에 list추가
   };
 
   const deleteTodo = (index) => {
     setTodos((prevTodos) => prevTodos.filter((item, i) => i !== index));
+    localStorage.setItem("todoLists", JSON.stringify(todos));
   };
 
   const deleteDone = (index) => {
