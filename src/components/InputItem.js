@@ -25,6 +25,9 @@ const InputField = styled.input`
   font-family: "Pretendard-Regular";
   margin-left: 3px;
   box-sizing: border-box;
+  &:focus {
+    outline-style: none;
+  }
 `;
 
 const AddButton = styled.button`

@@ -8,9 +8,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: "#F6F8FA";
-  margin: 0;
-  padding: 20px;
+  padding: 10px;
   align-items: center;
+
+  @media (max-width: 390px) {
+    width: auto;
+    height: 65vh;
+  }
 `;
 
 const Title = styled.h1`
@@ -31,9 +35,48 @@ const TodoList = styled.div`
   background-color: #f3f3f3;
   box-sizing: border-box;
   border-radius: 10px;
+
+  @media (max-width: 390px) {
+    width: 90%;
+    height: 65vh;
+  }
 `;
 
-const Done_lists = styled.div`
+const First = styled.div`
+  width: 49%;
+  height: 100%;
+  box-sizing: border-box;
+`;
+
+const Second = styled.div`
+  width: 49%;
+  height: 100%;
+  box-sizing: border-box;
+`;
+
+const Todos = styled.div`
+  width: 100%;
+  height: 90%;
+  border: 0.5px solid #736e6e;
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const Dones = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 90%;
+  color: #6d6d6d;
+  border: 0.5px solid #736e6e;
+  box-sizing: border-box;
+  border-radius: 10px;
+`;
+
+const Done_lists = styled.ul`
   overflow: auto;
   height: 80%;
   width: 100%;
@@ -44,7 +87,7 @@ const Done_lists = styled.div`
   box-sizing: border-box;
 `;
 
-const Todo_lists = styled.div`
+const Todo_lists = styled.ul`
   overflow: auto;
   height: 80%;
   width: 100%;
@@ -61,15 +104,29 @@ const Todo_lists = styled.div`
   font-size: 13px;
 `;
 
-const First = styled.div`
-  width: 49%;
-  height: 100%;
+const TodoNum = styled.span`
+  display: flex;
+  font-size: 13px;
+  font-family: "Pretendard-SemiBold";
+  width: 100%;
+  height: 10%;
+  align-items: center;
+  padding-left: 10px;
+  background-color: #e0e0e0;
+  border-radius: 10px 10px 0px 0px;
   box-sizing: border-box;
 `;
 
-const Second = styled.div`
-  width: 49%;
-  height: 100%;
+const DoneNum = styled.span`
+  display: flex;
+  font-size: 13px;
+  font-family: "Pretendard-SemiBold";
+  width: 100%;
+  height: 10%;
+  align-items: center;
+  padding-left: 10px;
+  background-color: #e0e0e0;
+  border-radius: 10px 10px 0px 0px;
   box-sizing: border-box;
 `;
 
@@ -80,12 +137,18 @@ export default function Todo() {
       <TodoList>
         <First>
           <TodoInput />
-          <Todo_lists />
+          <Todos>
+            <TodoNum>Todo: 0</TodoNum>
+            <Todo_lists />
+          </Todos>
         </First>
 
         <Second>
           <DailyDate />
-          <Done_lists />
+          <Dones>
+            <DoneNum>Done: 0</DoneNum>
+            <Done_lists />
+          </Dones>
         </Second>
       </TodoList>
 
