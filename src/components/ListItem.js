@@ -32,6 +32,12 @@ const IconBox = styled.div`
 `;
 
 export default function ListItem({ input, onClick, isClicked, deleteList }) {
+  const OpenConfirm = () => {
+    if (window.confirm("정말 리스트를 삭제하시겠습니까?")) {
+      deleteList();
+    }
+  };
+
   return (
     <Item>
       {isClicked ? (
@@ -59,14 +65,14 @@ export default function ListItem({ input, onClick, isClicked, deleteList }) {
           <FontAwesomeIcon
             icon={faTrashCan}
             style={{ height: 13 }}
-            onClick={deleteList}
+            onClick={OpenConfirm}
           />
         </IconBox>
       ) : (
         <FontAwesomeIcon
           icon={faTrashCan}
           style={{ height: 13 }}
-          onClick={deleteList}
+          onClick={OpenConfirm}
         />
       )}
     </Item>
