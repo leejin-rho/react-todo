@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { faCircle, faCircleCheck } from "@fortawesome/free-regular-svg-icons";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Item = styled.div`
@@ -27,25 +27,48 @@ const ClickedText = styled.text`
   text-decoration: line-through;
 `;
 
+const IconBox = styled.div`
+  display: flex;
+`;
+
 export default function ListItem({ input, onClick, isClicked, deleteList }) {
   return (
     <Item>
       {isClicked ? (
         <FontAwesomeIcon icon={faCircleCheck} style={{ height: 13 }} />
       ) : (
-        <FontAwesomeIcon icon={faCircle} style={{ height: 13 }} />
+        <FontAwesomeIcon
+          onClick={onClick}
+          icon={faCircle}
+          style={{ height: 13 }}
+        />
       )}
       {isClicked ? (
-        <ClickedText onClick={onClick}>{input}</ClickedText>
+        <ClickedText>{input}</ClickedText>
       ) : (
-        <ItemText onClick={onClick}>{input}</ItemText>
+        <ItemText>{input}</ItemText>
       )}
 
-      <FontAwesomeIcon
-        icon={faTrashCan}
-        style={{ height: 13 }}
-        onClick={deleteList}
-      />
+      {isClicked ? (
+        <IconBox>
+          <FontAwesomeIcon
+            icon={faRotateLeft}
+            style={{ height: 13, marginRight: 3 }}
+            onClick={onClick}
+          />
+          <FontAwesomeIcon
+            icon={faTrashCan}
+            style={{ height: 13 }}
+            onClick={deleteList}
+          />
+        </IconBox>
+      ) : (
+        <FontAwesomeIcon
+          icon={faTrashCan}
+          style={{ height: 13 }}
+          onClick={deleteList}
+        />
+      )}
     </Item>
   );
 }
