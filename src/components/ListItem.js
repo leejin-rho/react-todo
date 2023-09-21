@@ -17,13 +17,13 @@ const Item = styled.div`
 const ItemText = styled.text`
   font-family: "Pretendard-Regular";
   font-size: 13px;
-  margin: 0px 8px 0px 8px;
+  margin: 3px 8px 0px 8px;
 `;
 
 const ClickedText = styled.text`
   font-family: "Pretendard-Regular";
   font-size: 13px;
-  margin: 0px 8px 0px 8px;
+  margin: 3px 8px 0px 8px;
   text-decoration: line-through;
 `;
 

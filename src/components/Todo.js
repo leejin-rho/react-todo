@@ -29,7 +29,7 @@ const Title = styled.h1`
 const TodoList = styled.div`
   display: flex;
   align-items: center;
-  width: 80vh;
+  width: 77vh;
   height: 70vh;
   padding: 10px;
   justify-content: space-between;
