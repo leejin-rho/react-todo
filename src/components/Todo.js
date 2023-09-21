@@ -143,18 +143,18 @@ export default function Todo() {
   const [dones, setDones] = useState([]);
 
   const createTodo = (listInput) => {
-    setTodos((prevTodos) => [listInput, ...prevTodos]); //todo리스트에 Input div 추가
+    setTodos((prevTodos) => [...prevTodos, listInput]); //todo리스트에 Input div 추가
     //localStorage.setItem(JSON.stringify(todos));
   };
 
-  const moveTodo = (index) => {
+  const moveTodos = (index) => {
     setTodos((prevTodos) => prevTodos.filter((item, i) => i !== index)); //todo리스트에서 index가 일치하는 아이템만 제거한 리스트로 setTodo
-    setDones((prevDones) => [todos[index], ...prevDones]); //done리스트에 list추가
+    setDones((prevDones) => [...prevDones, todos[index]]); //done리스트에 list추가
   };
 
-  const moveDone = (index) => {
+  const moveDones = (index) => {
     setDones((prevDones) => prevDones.filter((item, i) => i !== index));
-    setTodos((prevTodos) => [dones[index], ...prevTodos]); //todo리스트에 list추가
+    setTodos((prevTodos) => [...prevTodos, dones[index]]); //todo리스트에 list추가
   };
 
   const deleteTodo = (index) => {
@@ -180,7 +180,7 @@ export default function Todo() {
                   input={item}
                   isClicked={false}
                   deleteList={() => deleteTodo(index)}
-                  onClick={() => moveTodo(index)}
+                  onClick={() => moveTodos(index)}
                 />
               ))}
             </Todo_lists>
@@ -198,7 +198,7 @@ export default function Todo() {
                   input={item}
                   isClicked={true}
                   deleteList={() => deleteDone(index)}
-                  onClick={() => moveDone(index)}
+                  onClick={() => moveDones(index)}
                 />
               ))}
             </Done_lists>
