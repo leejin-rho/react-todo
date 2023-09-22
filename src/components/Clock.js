@@ -13,6 +13,7 @@ const ClockText = styled.span`
 export default function Clock() {
   const [now, setNow] = useState(new Date());
 
+  //1초마다 now 다시 set
   useEffect(() => {
     const time = setInterval(() => {
       setNow(new Date());
