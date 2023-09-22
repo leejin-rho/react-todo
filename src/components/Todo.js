@@ -159,27 +159,32 @@ export default function Todo() {
     localStorage.setItem("doneLists", JSON.stringify(dones));
   }, [dones]);
 
+  //list 추가 함수
   const createTodo = (listInput) => {
     setTodos((prevTodos) => [...prevTodos, listInput]); //todo리스트에 Input div 추가
   };
 
+  //todo에서 done으로
   const moveTodos = (index) => {
     const moveList = todos[index];
     setTodos((prevTodos) => prevTodos.filter((item, i) => i !== index)); //todo리스트에서 index가 일치하는 아이템만 제거한 리스트로 setTodo
     setDones((prevDones) => [...prevDones, moveList]); //done리스트에 list추가
   };
 
+  //done에서 todo로
   const moveDones = (index) => {
     const moveList = dones[index];
     setDones((prevDones) => prevDones.filter((item, i) => i !== index));
     setTodos((prevTodos) => [...prevTodos, moveList]); //todo리스트에 list추가
   };
 
+  //todo에서 삭제
   const deleteTodo = (index) => {
     setTodos((prevTodos) => prevTodos.filter((item, i) => i !== index));
     localStorage.setItem("todoLists", JSON.stringify(todos));
   };
 
+  //done에서 삭제
   const deleteDone = (index) => {
     setDones((prevDones) => prevDones.filter((item, i) => i !== index));
   };
