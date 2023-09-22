@@ -14,13 +14,13 @@ const Item = styled.div`
   cursor: pointer;
 `;
 
-const ItemText = styled.text`
+const ItemText = styled.span`
   font-family: "Pretendard-Regular";
   font-size: 13px;
   margin: 3px 8px 0px 8px;
 `;
 
-const ClickedText = styled.text`
+const ClickedText = styled.span`
   font-family: "Pretendard-Regular";
   font-size: 13px;
   margin: 3px 8px 0px 8px;

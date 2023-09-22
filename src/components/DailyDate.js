@@ -16,7 +16,7 @@ const DateField = styled.div`
   box-sizing: border-box;
 `;
 
-const DateText = styled.text`
+const DateText = styled.span`
   font-family: "Pretendard-SemiBold";
   letter-spacing: 1px;
   font-size: 13px;
